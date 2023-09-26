@@ -16,7 +16,7 @@ app.use(cors());
 const __filename =fileURLToPath(import.meta.url);
 const __dirname =path.dirname(__filename);
 //db connection
-dbconnect();
+
 
 //config dotenv
 dotenv.config();
@@ -36,7 +36,9 @@ app.use("*",function(req,res){
 })
 //Port
 const PORT = process.env.PORT||8080;
-
-app.listen(PORT, () => {
+dbconnect().then(()=>{
+  app.listen(PORT, () => {
   console.log(`server is running on ${PORT}`);
 });
+})
+
